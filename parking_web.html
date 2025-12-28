@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Parking System Simulation - Web Version</title>
+    <link rel="stylesheet" href="parking_style_en.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@300;400;500;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1><i class="fas fa-parking"></i> Parking System Simulation</h1>
+            <p class="subtitle">Stack and Queue Based Parking Simulation - Web Graphical Interface Version</p>
+        </header>
+
+        <div class="main-content">
+            <div class="left-panel">
+                <div class="system-status card">
+                    <h2><i class="fas fa-chart-bar"></i> System Status Overview</h2>
+                    <div class="status-grid">
+                        <div class="status-item">
+                            <div class="status-label">Parking Capacity</div>
+                            <div class="status-value" id="total-capacity">10</div>
+                        </div>
+                        <div class="status-item">
+                            <div class="status-label">Current Parked</div>
+                            <div class="status-value" id="current-parked">0</div>
+                        </div>
+                        <div class="status-item">
+                            <div class="status-label">Available Spaces</div>
+                            <div class="status-value available" id="available-spaces">10</div>
+                        </div>
+                        <div class="status-item">
+                            <div class="status-label">Waiting Lane</div>
+                            <div class="status-value" id="waiting-count">0</div>
+                        </div>
+                        <div class="status-item">
+                            <div class="status-label">Hourly Rate</div>
+                            <div class="status-value">5$/hour</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="parking-spaces card">
+                    <h2><i class="fas fa-car"></i> Parking Space Usage</h2>
+                    <div class="space-types">
+                        <div class="space-type">
+                            <div class="space-label small">Small Spaces</div>
+                            <div class="space-count"><span id="small-used">0</span>/<span id="small-total">3</span></div>
+                            <div class="space-bar">
+                                <div class="space-fill small-fill" id="small-bar" style="width: 0%"></div>
+                            </div>
+                        </div>
+                        <div class="space-type">
+                            <div class="space-label medium">Medium Spaces</div>
+                            <div class="space-count"><span id="medium-used">0</span>/<span id="medium-total">3</span></div>
+                            <div class="space-bar">
+                                <div class="space-fill medium-fill" id="medium-bar" style="width: 0%"></div>
+                            </div>
+                        </div>
+                        <div class="space-type">
+                            <div class="space-label large">Large Spaces</div>
+                            <div class="space-count"><span id="large-used">0</span>/<span id="large-total">4</span></div>
+                            <div class="space-bar">
+                                <div class="space-fill large-fill" id="large-bar" style="width: 0%"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="operations card">
+                    <h2><i class="fas fa-cogs"></i> Operation Panel</h2>
+                    <div class="operation-buttons">
+                        <button class="btn btn-arrival" id="btn-arrival">
+                            <i class="fas fa-sign-in-alt"></i> Car Arrival
+                        </button>
+                        <button class="btn btn-departure" id="btn-departure">
+                            <i class="fas fa-sign-out-alt"></i> Car Departure
+                        </button>
+                        <button class="btn btn-test" id="btn-test">
+                            <i class="fas fa-vial"></i> Run Test Data
+                        </button>
+                        <button class="btn btn-reset" id="btn-reset">
+                            <i class="fas fa-redo"></i> Reset System
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="right-panel">
+                <div class="visualization card">
+                    <h2><i class="fas fa-eye"></i> Parking Lot Visualization</h2>
+                    <div class="parking-lot-container">
+                        <!-- Direction labels -->
+                        <div class="direction-label north-label">
+                            <i class="fas fa-arrow-up"></i> North (First Car)
+                        </div>
+                        <div class="direction-label south-label">
+                            <i class="fas fa-arrow-down"></i> South (Gate)
+                        </div>
+                        
+                        <!-- Parking spaces -->
+                        <div class="parking-lot" id="parking-lot">
+                            <!-- Parking spaces will be dynamically generated by JavaScript -->
+                            <div class="parking-lot-empty">
+                                <i class="fas fa-parking fa-3x"></i>
+                                <p>Parking Lot Visualization Area</p>
+                                <p>Parking spaces will be displayed here</p>
+                            </div>
+                        </div>
+                        
+                        <!-- Gate icon -->
+                        <div class="parking-gate">
+                            <i class="fas fa-gate gate-icon"></i>
+                            <div class="gate-label">Main Gate (Entrance/Exit)</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="waiting-lane card">
+                    <h2><i class="fas fa-road"></i> Waiting Lane</h2>
+                    <div class="lane-container" id="waiting-lane">
+                        <!-- Waiting lane cars will be dynamically generated by JavaScript -->
+                        <div class="lane-empty">
+                            <i class="fas fa-car-side fa-3x"></i>
+                            <p>Waiting lane is empty</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="log card">
+                    <h2><i class="fas fa-clipboard-list"></i> Operation Log</h2>
+                    <div class="log-container" id="log-container">
+                        <div class="log-entry welcome">
+                            <div class="log-time">18:00:00</div>
+                            <div class="log-message">Welcome to Parking System Simulation! System initialized.</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="modal" id="arrival-modal">
+            <div class="modal-content">
+                <h2><i class="fas fa-sign-in-alt"></i> Car Arrival</h2>
+                <div class="form-group">
+                    <label for="license-plate">License Plate</label>
+                    <input type="text" id="license-plate" placeholder="e.g.: ABC123" maxlength="10">
+                </div>
+                <div class="form-group">
+                    <label for="car-type">Car Type</label>
+                    <div class="car-type-buttons">
+                        <button class="car-type-btn small active" data-type="0">
+                            <i class="fas fa-car"></i> Small Car
+                        </button>
+                        <button class="car-type-btn medium" data-type="1">
+                            <i class="fas fa-shuttle-van"></i> Medium Car
+                        </button>
+                        <button class="car-type-btn large" data-type="2">
+                            <i class="fas fa-truck"></i> Large Car
+                        </button>
+                    </div>
+                </div>
+                <div class="modal-buttons">
+                    <button class="btn btn-cancel" id="btn-cancel-arrival">Cancel</button>
+                    <button class="btn btn-confirm" id="btn-confirm-arrival">Confirm Arrival</button>
+                </div>
+            </div>
+        </div>
+
+        <div class="modal" id="departure-modal">
+            <div class="modal-content">
+                <h2><i class="fas fa-sign-out-alt"></i> Car Departure</h2>
+                <div class="form-group">
+                    <label for="departure-license">License Plate</label>
+                    <input type="text" id="departure-license" placeholder="Enter license plate to depart">
+                </div>
+                <div class="modal-buttons">
+                    <button class="btn btn-cancel" id="btn-cancel-departure">Cancel</button>
+                    <button class="btn btn-confirm" id="btn-confirm-departure">Confirm Departure</button>
+                </div>
+            </div>
+        </div>
+
+        <footer>
+            <p>Parking System Simulation Web Version &copy; 2025 | Ported from C++ Console Version | Implemented with HTML/CSS/JavaScript</p>
+        </footer>
+    </div>
+
+    <script src="parking_script_en.js"></script>
+</body>
+</html>

@@ -1,0 +1,605 @@
+/* 停车场模拟系统 - Web版样式 */
+:root {
+    --primary-color: #3498db;
+    --secondary-color: #2ecc71;
+    --danger-color: #e74c3c;
+    --warning-color: #f39c12;
+    --dark-color: #2c3e50;
+    --light-color: #ecf0f1;
+    --gray-color: #95a5a6;
+    --small-car-color: #27ae60;
+    --medium-car-color: #f39c12;
+    --large-car-color: #e74c3c;
+    --small-space-color: #2ecc71;
+    --medium-space-color: #f1c40f;
+    --large-space-color: #e67e22;
+    --shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    --border-radius: 10px;
+    --transition: all 0.3s ease;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Noto Sans SC', sans-serif;
+    background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+    color: var(--dark-color);
+    min-height: 100vh;
+    padding: 20px;
+}
+
+.container {
+    max-width: 1400px;
+    margin: 0 auto;
+}
+
+/* 头部样式 */
+header {
+    text-align: center;
+    margin-bottom: 30px;
+    padding: 20px;
+    background: white;
+    border-radius: var(--border-radius);
+    box-shadow: var(--shadow);
+}
+
+header h1 {
+    color: var(--primary-color);
+    font-size: 2.5rem;
+    margin-bottom: 10px;
+}
+
+header h1 i {
+    margin-right: 15px;
+}
+
+.subtitle {
+    color: var(--gray-color);
+    font-size: 1.1rem;
+}
+
+/* 主内容区域 */
+.main-content {
+    display: grid;
+    grid-template-columns: 1fr 2fr;
+    gap: 25px;
+    margin-bottom: 30px;
+}
+
+/* 卡片通用样式 */
+.card {
+    background: white;
+    border-radius: var(--border-radius);
+    box-shadow: var(--shadow);
+    padding: 25px;
+    margin-bottom: 25px;
+    transition: var(--transition);
+}
+
+.card:hover {
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+}
+
+.card h2 {
+    color: var(--dark-color);
+    font-size: 1.5rem;
+    margin-bottom: 20px;
+    padding-bottom: 10px;
+    border-bottom: 2px solid var(--light-color);
+}
+
+.card h2 i {
+    margin-right: 10px;
+    color: var(--primary-color);
+}
+
+/* 系统状态概览 */
+.status-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 15px;
+}
+
+.status-item {
+    text-align: center;
+    padding: 15px;
+    background: var(--light-color);
+    border-radius: 8px;
+    transition: var(--transition);
+}
+
+.status-item:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.status-label {
+    font-size: 0.9rem;
+    color: var(--gray-color);
+    margin-bottom: 8px;
+}
+
+.status-value {
+    font-size: 1.8rem;
+    font-weight: 700;
+    color: var(--dark-color);
+}
+
+.status-value.available {
+    color: var(--secondary-color);
+}
+
+/* 车位使用情况 */
+.space-types {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.space-type {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+.space-label {
+    font-weight: 600;
+    width: 100px;
+    padding: 8px 12px;
+    border-radius: 6px;
+    text-align: center;
+    color: white;
+}
+
+.space-label.small {
+    background-color: var(--small-space-color);
+}
+
+.space-label.medium {
+    background-color: var(--medium-space-color);
+}
+
+.space-label.large {
+    background-color: var(--large-space-color);
+}
+
+.space-count {
+    font-weight: 600;
+    font-size: 1.2rem;
+    min-width: 60px;
+}
+
+.space-bar {
+    flex: 1;
+    height: 20px;
+    background-color: var(--light-color);
+    border-radius: 10px;
+    overflow: hidden;
+}
+
+.space-fill {
+    height: 100%;
+    border-radius: 10px;
+    transition: width 0.5s ease;
+}
+
+.small-fill {
+    background-color: var(--small-space-color);
+}
+
+.medium-fill {
+    background-color: var(--medium-space-color);
+}
+
+.large-fill {
+    background-color: var(--large-space-color);
+}
+
+/* 操作面板 */
+.operation-buttons {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 15px;
+}
+
+.btn {
+    padding: 15px 20px;
+    border: none;
+    border-radius: 8px;
+    font-family: 'Noto Sans SC', sans-serif;
+    font-size: 1.1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: var(--transition);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+}
+
+.btn:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.btn:active {
+    transform: translateY(0);
+}
+
+.btn-arrival {
+    background-color: var(--secondary-color);
+    color: white;
+}
+
+.btn-departure {
+    background-color: var(--danger-color);
+    color: white;
+}
+
+.btn-test {
+    background-color: var(--warning-color);
+    color: white;
+}
+
+.btn-reset {
+    background-color: var(--gray-color);
+    color: white;
+}
+
+/* 停车场可视化 */
+.parking-lot {
+    min-height: 300px;
+    background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+    border-radius: 8px;
+    padding: 20px;
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 15px;
+    align-content: start;
+}
+
+.parking-lot-empty {
+    grid-column: 1 / -1;
+    text-align: center;
+    padding: 40px 20px;
+    color: var(--gray-color);
+}
+
+.parking-lot-empty i {
+    margin-bottom: 15px;
+    color: var(--gray-color);
+}
+
+.parking-space {
+    background: white;
+    border-radius: 8px;
+    padding: 15px;
+    text-align: center;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    transition: var(--transition);
+    border: 2px solid transparent;
+}
+
+.parking-space:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+}
+
+.parking-space.empty {
+    border-color: var(--secondary-color);
+    background-color: rgba(46, 204, 113, 0.1);
+}
+
+.parking-space.occupied {
+    border-color: var(--danger-color);
+    background-color: rgba(231, 76, 60, 0.1);
+}
+
+.parking-space.small {
+    border-left: 5px solid var(--small-space-color);
+}
+
+.parking-space.medium {
+    border-left: 5px solid var(--medium-space-color);
+}
+
+.parking-space.large {
+    border-left: 5px solid var(--large-space-color);
+}
+
+.space-number {
+    font-weight: 700;
+    font-size: 1.2rem;
+    margin-bottom: 10px;
+    color: var(--dark-color);
+}
+
+.car-info {
+    font-size: 0.9rem;
+    margin-top: 10px;
+}
+
+.car-license {
+    font-weight: 600;
+    color: var(--dark-color);
+    margin-bottom: 5px;
+}
+
+.car-type {
+    font-size: 0.8rem;
+    padding: 3px 8px;
+    border-radius: 4px;
+    color: white;
+    display: inline-block;
+}
+
+.car-type.small {
+    background-color: var(--small-car-color);
+}
+
+.car-type.medium {
+    background-color: var(--medium-car-color);
+}
+
+.car-type.large {
+    background-color: var(--large-car-color);
+}
+
+/* 候车道 */
+.lane-container {
+    min-height: 120px;
+    background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+    border-radius: 8px;
+    padding: 20px;
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    overflow-x: auto;
+}
+
+.lane-empty {
+    text-align: center;
+    flex: 1;
+    color: var(--gray-color);
+}
+
+.waiting-car {
+    background: white;
+    border-radius: 8px;
+    padding: 15px;
+    min-width: 120px;
+    text-align: center;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    border-left: 5px solid var(--warning-color);
+}
+
+.waiting-car .car-license {
+    font-size: 1.1rem;
+    margin-bottom: 8px;
+}
+
+/* 操作日志 */
+.log-container {
+    max-height: 200px;
+    overflow-y: auto;
+    padding-right: 10px;
+}
+
+.log-entry {
+    padding: 12px 15px;
+    margin-bottom: 10px;
+    background: var(--light-color);
+    border-radius: 6px;
+    border-left: 4px solid var(--primary-color);
+    display: flex;
+    gap: 15px;
+}
+
+.log-entry.welcome {
+    border-left-color: var(--secondary-color);
+}
+
+.log-entry.arrival {
+    border-left-color: var(--secondary-color);
+}
+
+.log-entry.departure {
+    border-left-color: var(--danger-color);
+}
+
+.log-entry.test {
+    border-left-color: var(--warning-color);
+}
+
+.log-time {
+    font-weight: 600;
+    color: var(--dark-color);
+    min-width: 70px;
+}
+
+.log-message {
+    flex: 1;
+}
+
+/* 模态框 */
+.modal {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    z-index: 1000;
+    align-items: center;
+    justify-content: center;
+}
+
+.modal.active {
+    display: flex;
+}
+
+.modal-content {
+    background: white;
+    border-radius: var(--border-radius);
+    padding: 30px;
+    width: 90%;
+    max-width: 500px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+}
+
+.modal-content h2 {
+    margin-bottom: 25px;
+    color: var(--dark-color);
+}
+
+.form-group {
+    margin-bottom: 20px;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 8px;
+    font-weight: 600;
+    color: var(--dark-color);
+}
+
+.form-group input {
+    width: 100%;
+    padding: 12px 15px;
+    border: 2px solid var(--light-color);
+    border-radius: 6px;
+    font-family: 'Noto Sans SC', sans-serif;
+    font-size: 1rem;
+    transition: var(--transition);
+}
+
+.form-group input:focus {
+    outline: none;
+    border-color: var(--primary-color);
+}
+
+.car-type-buttons {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 10px;
+}
+
+.car-type-btn {
+    padding: 15px 10px;
+    border: 2px solid var(--light-color);
+    background: white;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: var(--transition);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
+    font-weight: 600;
+}
+
+.car-type-btn:hover {
+    border-color: var(--primary-color);
+}
+
+.car-type-btn.active {
+    border-color: var(--primary-color);
+    background-color: rgba(52, 152, 219, 0.1);
+}
+
+.car-type-btn.small.active {
+    border-color: var(--small-car-color);
+    background-color: rgba(39, 174, 96, 0.1);
+}
+
+.car-type-btn.medium.active {
+    border-color: var(--medium-car-color);
+    background-color: rgba(243, 156, 18, 0.1);
+}
+
+.car-type-btn.large.active {
+    border-color: var(--large-car-color);
+    background-color: rgba(231, 76, 60, 0.1);
+}
+
+.car-type-btn i {
+    font-size: 1.5rem;
+}
+
+.modal-buttons {
+    display: flex;
+    justify-content: flex-end;
+    gap: 15px;
+    margin-top: 30px;
+}
+
+.btn-cancel {
+    background-color: var(--gray-color);
+    color: white;
+}
+
+.btn-confirm {
+    background-color: var(--primary-color);
+    color: white;
+}
+
+/* 页脚 */
+footer {
+    text-align: center;
+    padding: 20px;
+    color: var(--gray-color);
+    font-size: 0.9rem;
+    background: white;
+    border-radius: var(--border-radius);
+    box-shadow: var(--shadow);
+}
+
+/* 响应式设计 */
+@media (max-width: 1200px) {
+    .main-content {
+        grid-template-columns: 1fr;
+    }
+    
+    .parking-lot {
+        grid-template-columns: repeat(4, 1fr);
+    }
+}
+
+@media (max-width: 768px) {
+    .status-grid {
+        grid-template-columns: 1fr;
+    }
+    
+    .parking-lot {
+        grid-template-columns: repeat(3, 1fr);
+    }
+    
+    .car-type-buttons {
+        grid-template-columns: 1fr;
+    }
+    
+    header h1 {
+        font-size: 2rem;
+    }
+}
+
+@media (max-width: 576px) {
+    .parking-lot {
+        grid-template-columns: repeat(2, 1fr);
+    }
+    
+    .space-type {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 10px;
+    }
+    
+    .space-bar {
+        width: 100%;
+    }
+}
